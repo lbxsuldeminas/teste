@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Denúncias do Bairro</title>
+</head>
+<body>
+
+<h2>Enviar denúncia</h2>
+
+<input id="title" placeholder="Título"><br><br>
+<input id="desc" placeholder="Descrição"><br><br>
+<input id="type" placeholder="Tipo"><br><br>
+
+<button onclick="enviar()">Enviar</button>
+
+<h2>Lista de denúncias</h2>
+<ul id="lista"></ul>
+
+<script>
+let reports = [];
+
+function enviar() {
+  const report = {
+    title: document.getElementById("title").value,
+    description: document.getElementById("desc").value,
+    type: document.getElementById("type").value
+  };
+
+  reports.push(report);
+  atualizarLista();
+
+  alert("Denúncia adicionada!");
+}
+
+function atualizarLista() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  reports.forEach(r => {
+    const item = document.createElement("li");
+    item.innerText = r.title + " - " + r.type + " (" + r.description + ")";
+    lista.appendChild(item);
+  });
+}
+</script>
+
+</body>
+</html>
