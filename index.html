@@ -105,9 +105,31 @@ button.del{
 <div id="veiculos" class="secao" style="display:none;">
     <div class="card">
         <h3>Veículos</h3>
+
         <input id="nomeVeiculo" placeholder="Nome do veículo">
+        <input id="placaVeiculo" placeholder="Placa">
+
+        <select id="secretariaVeiculo">
+            <option value="">Secretaria</option>
+            <option>Agropecuária</option>
+            <option>Obras</option>
+            <option>Educação</option>
+            <option>Saúde</option>
+            <option>Gabinete</option>
+            <option>Assistência Social</option>
+            <option>Cultura</option>
+            <option>Conselho Tutelar</option>
+        </select>
+
+        <select id="statusVeiculo">
+            <option value="">Situação</option>
+            <option>Disponível</option>
+            <option>Em manutenção</option>
+        </select>
+
         <button class="add" onclick="addVeiculo()">Adicionar</button>
     </div>
+
     <div id="listaVeiculos"></div>
 </div>
 
@@ -123,7 +145,8 @@ button.del{
 
 </div>
 
-<script>
+    <script>
+
 // ====== NAVEGAÇÃO ======
 function mostrar(secao){
     document.querySelectorAll(".secao").forEach(s => s.style.display="none");
@@ -167,11 +190,21 @@ function delMotorista(i){
     renderMotoristas();
 }
 
-// ====== VEICULOS ======
+// ====== VEICULOS (ATUALIZADO) ======
 function addVeiculo(){
     let nome = document.getElementById("nomeVeiculo").value;
-    if(nome){
-        veiculos.push(nome);
+    let placa = document.getElementById("placaVeiculo").value;
+    let secretaria = document.getElementById("secretariaVeiculo").value;
+    let status = document.getElementById("statusVeiculo").value;
+
+    if(nome && placa && secretaria && status){
+        veiculos.push({
+            nome,
+            placa,
+            secretaria,
+            status
+        });
+
         salvar();
         renderVeiculos();
     }
@@ -179,10 +212,19 @@ function addVeiculo(){
 
 function renderVeiculos(){
     let html = "";
+
     veiculos.forEach((v,i)=>{
-        html += `<div class="card">${v}
-        <button class="del" onclick="delVeiculo(${i})">X</button></div>`;
+        html += `
+        <div class="card">
+            <b>${v.nome}</b><br>
+            Placa: ${v.placa}<br>
+            Secretaria: ${v.secretaria}<br>
+            Situação: ${v.status}<br>
+
+            <button class="del" onclick="delVeiculo(${i})">X</button>
+        </div>`;
     });
+
     document.getElementById("listaVeiculos").innerHTML = html;
 }
 
@@ -217,11 +259,9 @@ function delPeca(i){
     renderPecas();
 }
 
-// inicializar
+// ====== INICIALIZAÇÃO ======
 renderMotoristas();
 renderVeiculos();
 renderPecas();
-</script>
 
-</body>
-</html>
+<script>
