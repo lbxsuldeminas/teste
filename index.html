@@ -190,7 +190,9 @@ function delMotorista(i){
     renderMotoristas();
 }
 
-// ====== VEICULOS (ATUALIZADO) ======
+// ====== VEICULOS ======
+let editIndex = null;
+
 function addVeiculo(){
     let nome = document.getElementById("nomeVeiculo").value;
     let placa = document.getElementById("placaVeiculo").value;
@@ -198,15 +200,24 @@ function addVeiculo(){
     let status = document.getElementById("statusVeiculo").value;
 
     if(nome && placa && secretaria && status){
-        veiculos.push({
-            nome,
-            placa,
-            secretaria,
-            status
-        });
+
+        let veiculo = { nome, placa, secretaria, status };
+
+        if(editIndex === null){
+            veiculos.push(veiculo);
+        } else {
+            veiculos[editIndex] = veiculo;
+            editIndex = null;
+        }
 
         salvar();
         renderVeiculos();
+
+        // limpar campos
+        document.getElementById("nomeVeiculo").value = "";
+        document.getElementById("placaVeiculo").value = "";
+        document.getElementById("secretariaVeiculo").value = "";
+        document.getElementById("statusVeiculo").value = "";
     }
 }
 
@@ -221,11 +232,23 @@ function renderVeiculos(){
             Secretaria: ${v.secretaria}<br>
             Situação: ${v.status}<br>
 
+            <button class="add" onclick="editarVeiculo(${i})">Editar</button>
             <button class="del" onclick="delVeiculo(${i})">X</button>
         </div>`;
     });
 
     document.getElementById("listaVeiculos").innerHTML = html;
+}
+
+function editarVeiculo(i){
+    let v = veiculos[i];
+
+    document.getElementById("nomeVeiculo").value = v.nome;
+    document.getElementById("placaVeiculo").value = v.placa;
+    document.getElementById("secretariaVeiculo").value = v.secretaria;
+    document.getElementById("statusVeiculo").value = v.status;
+
+    editIndex = i;
 }
 
 function delVeiculo(i){
