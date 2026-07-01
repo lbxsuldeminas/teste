@@ -7,74 +7,138 @@
 <style>
 body{
     margin:0;
-    font-family:Arial;
-    background:#eef3f8;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
     display:flex;
+    color:#333;
 }
 
 /* MENU LATERAL */
 .menu{
-    width:220px;
-    background:#1e2a38;
+    width:240px;
+    background:linear-gradient(180deg,#1e2a38,#17202b);
     color:white;
     height:100vh;
     padding:20px;
+    box-shadow:2px 0 10px rgba(0,0,0,0.2);
 }
 
 .menu h2{
-    font-size:18px;
-    margin-bottom:20px;
+    font-size:20px;
+    margin-bottom:25px;
+    text-align:center;
+    letter-spacing:1px;
 }
 
 .menu button{
     width:100%;
-    margin-bottom:10px;
-    padding:10px;
+    margin-bottom:12px;
+    padding:12px;
     border:none;
     cursor:pointer;
-    border-radius:5px;
+    border-radius:8px;
     background:#2f435a;
     color:white;
+    font-size:14px;
+    transition:0.2s;
 }
 
 .menu button:hover{
     background:#3d5a78;
+    transform:scale(1.03);
 }
 
 /* CONTEÚDO */
 .content{
     flex:1;
-    padding:20px;
+    padding:25px;
 }
 
+/* CARDS */
 .card{
     background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
     margin-bottom:15px;
+    transition:0.2s;
 }
 
-input{
-    padding:8px;
-    margin:5px;
+.card:hover{
+    transform:translateY(-2px);
 }
 
+/* INPUTS */
+input, select{
+    padding:10px;
+    margin:6px 5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    width:180px;
+}
+
+input:focus, select:focus{
+    border-color:#2f435a;
+}
+
+/* BOTÃO ADICIONAR */
 button.add{
     background:#28a745;
     color:white;
     border:none;
-    padding:8px 12px;
+    padding:10px 14px;
     cursor:pointer;
-    border-radius:5px;
+    border-radius:8px;
+    font-size:13px;
+    min-width:120px;
+    transition:0.2s;
 }
 
+button.add:hover{
+    background:#218838;
+    transform:scale(1.03);
+}
+
+/* BOTÃO EXCLUIR */
 button.del{
-    background:red;
+    background:#dc3545;
     color:white;
     border:none;
-    padding:5px;
+    padding:6px 10px;
     cursor:pointer;
+    border-radius:6px;
+    font-size:12px;
+    margin-left:8px;
+    transition:0.2s;
+}
+
+button.del:hover{
+    background:#c82333;
+    transform:scale(1.05);
+}
+
+/* BOTÃO EDITAR */
+button.edit{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    cursor:pointer;
+    border-radius:6px;
+    font-size:12px;
+    margin-left:8px;
+    transition:0.2s;
+}
+
+button.edit:hover{
+    background:#0069d9;
+    transform:scale(1.05);
+}
+
+/* LISTA */
+.card b{
+    font-size:16px;
 }
 </style>
 
