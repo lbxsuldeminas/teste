@@ -1,449 +1,124 @@
 <!DOCTYPE html>
-
-<style>
-    /* ===========================
-   RESET
-=========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
-
-body{
-    background:#eef3f8;
-    display:flex;
-    color:#333;
-}
-
-/* ===========================
-   SIDEBAR
-=========================== */
-
-.sidebar{
-    width:270px;
-    height:100vh;
-    background:linear-gradient(180deg,#0d6efd,#084298);
-    color:#fff;
-    position:fixed;
-    left:0;
-    top:0;
-    overflow:auto;
-    box-shadow:5px 0 15px rgba(0,0,0,.2);
-}
-
-.logo{
-    text-align:center;
-    padding:30px 20px;
-    border-bottom:1px solid rgba(255,255,255,.15);
-}
-
-.logo i{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.logo h4{
-    margin-top:10px;
-    font-weight:bold;
-}
-
-.logo small{
-    opacity:.8;
-}
-
-.sidebar ul{
-    list-style:none;
-    padding:20px 0;
-}
-
-.sidebar ul li{
-    padding:18px 25px;
-    cursor:pointer;
-    transition:.3s;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    font-size:16px;
-}
-
-.sidebar ul li:hover{
-    background:rgba(255,255,255,.15);
-    padding-left:35px;
-}
-
-.sidebar ul li.active{
-    background:#fff;
-    color:#0d6efd;
-    border-radius:40px 0 0 40px;
-    margin-left:15px;
-    font-weight:bold;
-}
-
-/* ===========================
-   MAIN
-=========================== */
-
-main{
-    margin-left:270px;
-    width:100%;
-    padding:30px;
-}
-
-/* ===========================
-   HEADER
-=========================== */
-
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:35px;
-}
-
-header h2{
-    font-weight:bold;
-}
-
-.user{
-    background:#fff;
-    padding:12px 20px;
-    border-radius:50px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-    font-weight:600;
-}
-
-.user i{
-    color:#0d6efd;
-    margin-right:8px;
-    font-size:22px;
-}
-
-/* ===========================
-   CARDS
-=========================== */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
-    margin-bottom:35px;
-}
-
-.card-box{
-    background:#fff;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-    transition:.3s;
-    position:relative;
-    overflow:hidden;
-}
-
-.card-box::before{
-    content:"";
-    position:absolute;
-    width:120px;
-    height:120px;
-    background:rgba(13,110,253,.08);
-    border-radius:50%;
-    right:-30px;
-    top:-30px;
-}
-
-.card-box:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 30px rgba(0,0,0,.15);
-}
-
-.card-box i{
-    font-size:45px;
-    color:#0d6efd;
-    margin-bottom:15px;
-}
-
-.card-box h3{
-    font-size:30px;
-    margin-bottom:5px;
-    font-weight:bold;
-}
-
-.card-box span{
-    color:#666;
-}
-
-/* ===========================
-   GRÁFICOS
-=========================== */
-
-.graficos{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(450px,1fr));
-    gap:25px;
-    margin-bottom:35px;
-}
-
-.grafico{
-    background:#fff;
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-}
-
-.grafico h4{
-    margin-bottom:20px;
-    font-weight:bold;
-}
-
-/* ===========================
-   TABELA
-=========================== */
-
-.tabela{
-    background:#fff;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-}
-
-.titulo{
-    margin-bottom:20px;
-}
-
-.table{
-    margin:0;
-}
-
-.table thead{
-    background:#0d6efd;
-    color:#fff;
-}
-
-.table th{
-    padding:15px;
-}
-
-.table td{
-    padding:15px;
-    vertical-align:middle;
-}
-
-/* ===========================
-   BARRA DE ROLAGEM
-=========================== */
-
-::-webkit-scrollbar{
-    width:8px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#0d6efd;
-    border-radius:10px;
-}
-
-/* ===========================
-   RESPONSIVO
-=========================== */
-
-@media(max-width:900px){
-
-.sidebar{
-
-    width:80px;
-
-}
-
-.logo h4,
-.logo small{
-
-display:none;
-
-}
-
-.sidebar li{
-
-justify-content:center;
-
-font-size:0;
-
-}
-
-.sidebar li i{
-
-font-size:22px;
-
-margin:0;
-
-}
-
-main{
-
-margin-left:80px;
-
-padding:20px;
-
-}
-
-.graficos{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-@media(max-width:600px){
-
-.cards{
-
-grid-template-columns:1fr;
-
-}
-
-header{
-
-flex-direction:column;
-gap:15px;
-
-align-items:flex-start;
-
-}
-
-}
-</style>
-
 <html lang="pt-BR">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Secretaria Municipal de Transportes</title>
-
-    <!-- Bootstrap -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- CSS -->
+    <title>Secretaria Municipal de Transportes - Conceição do Rio Verde</title>
 
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6d2ea823d0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- MENU LATERAL -->
 
-    <div class="sidebar">
+    <aside class="sidebar">
 
         <div class="logo">
-
-            <i class="fa-solid fa-truck"></i>
-
-            <h4>Transportes</h4>
-
-            <small>Conceição do Rio Verde</small>
-
+            <h2>🚛 Transporte</h2>
+            <span>Conceição do Rio Verde</span>
         </div>
 
-        <ul>
+        <nav>
 
-            <li class="active">
+            <ul>
 
-                <i class="fa-solid fa-house"></i>
+                <li class="active">
+                    <a href="#">
+                        <i class="fas fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
 
-                Dashboard
+                <li>
+                    <a href="#">
+                        <i class="fas fa-car"></i>
+                        Veículos
+                    </a>
+                </li>
 
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        Motoristas
+                    </a>
+                </li>
 
-            <li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-boxes-stacked"></i>
+                        Almoxarifado
+                    </a>
+                </li>
 
-                <i class="fa-solid fa-boxes-stacked"></i>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-gas-pump"></i>
+                        Combustível
+                    </a>
+                </li>
 
-                Almoxarifado
+                <li>
+                    <a href="#">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                        Manutenções
+                    </a>
+                </li>
 
-            </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-camera"></i>
+                        Fotos
+                    </a>
+                </li>
 
-            <li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-column"></i>
+                        Relatórios
+                    </a>
+                </li>
 
-                <i class="fa-solid fa-car"></i>
+            </ul>
 
-                Veículos
+        </nav>
 
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-gas-pump"></i>
-
-                Combustível
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-
-                Manutenções
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-user"></i>
-
-                Motoristas
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-file-lines"></i>
-
-                Ordens de Serviço
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-chart-line"></i>
-
-                Relatórios
-
-            </li>
-
-            <li>
-
-                <i class="fa-solid fa-gear"></i>
-
-                Configurações
-
-            </li>
-
-        </ul>
-
-    </div>
+    </aside>
 
     <!-- CONTEÚDO -->
 
-    <main>
+    <main class="content">
 
-        <header>
+        <!-- TOPO -->
 
-            <h2>Dashboard</h2>
+        <header class="topbar">
 
-            <div class="user">
+            <div>
 
-                <i class="fa-solid fa-circle-user"></i>
+                <h1>Dashboard</h1>
 
-                Administrador
+                <p>
+                    Secretaria Municipal de Transportes
+                </p>
+
+            </div>
+
+            <div class="usuario">
+
+                <i class="fas fa-user-circle"></i>
+
+                <div>
+
+                    <strong>Secretário</strong>
+
+                    <span>Administrador</span>
+
+                </div>
 
             </div>
 
@@ -453,132 +128,281 @@ align-items:flex-start;
 
         <section class="cards">
 
-            <div class="card-box">
+            <div class="card">
 
-                <i class="fa-solid fa-car"></i>
+                <i class="fas fa-car"></i>
 
-                <h3 id="veiculos">28</h3>
+                <h3>Veículos</h3>
 
-                <span>Veículos</span>
-
-            </div>
-
-            <div class="card-box">
-
-                <i class="fa-solid fa-gas-pump"></i>
-
-                <h3 id="combustivel">R$ 34.580</h3>
-
-                <span>Combustível</span>
+                <span>42</span>
 
             </div>
 
-            <div class="card-box">
+            <div class="card">
 
-                <i class="fa-solid fa-box"></i>
+                <i class="fas fa-user"></i>
 
-                <h3 id="estoque">845</h3>
+                <h3>Motoristas</h3>
 
-                <span>Peças</span>
-
-            </div>
-
-            <div class="card-box">
-
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-
-                <h3 id="servicos">112</h3>
-
-                <span>Serviços</span>
+                <span>31</span>
 
             </div>
 
-        </section>
+            <div class="card">
 
-        <!-- GRÁFICOS -->
+                <i class="fas fa-boxes-stacked"></i>
 
-        <section class="graficos">
+                <h3>Peças</h3>
 
-            <div class="grafico">
-
-                <h4>Gastos Mensais</h4>
-
-                <canvas id="grafico1"></canvas>
+                <span>286</span>
 
             </div>
 
-            <div class="grafico">
+            <div class="card">
 
-                <h4>Veículos por Situação</h4>
+                <i class="fas fa-gas-pump"></i>
 
-                <canvas id="grafico2"></canvas>
+                <h3>Combustível</h3>
+
+                <span>R$ 18.430</span>
 
             </div>
 
         </section>
 
-        <!-- TABELA -->
+        <!-- PAINÉIS -->
 
-        <section class="tabela">
+        <section class="painel-grid">
 
-            <div class="titulo">
+            <!-- MOTORISTAS -->
 
-                <h4>Últimas Movimentações</h4>
+            <div class="box">
+
+                <h2>
+                    <i class="fas fa-user"></i>
+                    Motoristas em serviço
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Motorista</th>
+                            <th>Veículo</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>João Silva</td>
+                            <td>Fiat Strada</td>
+                        </tr>
+
+                        <tr>
+                            <td>Carlos Souza</td>
+                            <td>Ônibus Escolar</td>
+                        </tr>
+
+                        <tr>
+                            <td>Pedro Lima</td>
+                            <td>Ambulância</td>
+                        </tr>
+
+                        <tr>
+                            <td>Marcos Oliveira</td>
+                            <td>Patrol</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
 
             </div>
 
-            <table class="table table-striped">
+            <!-- ALMOXARIFADO -->
 
-                <thead>
+            <div class="box">
 
-                    <tr>
+                <h2>
 
-                        <th>Data</th>
-                        <th>Veículo</th>
-                        <th>Motorista</th>
-                        <th>Serviço</th>
-                        <th>Status</th>
+                    <i class="fas fa-boxes-stacked"></i>
 
-                    </tr>
+                    Últimas movimentações
 
-                </thead>
+                </h2>
 
-                <tbody>
+                <table>
 
-                    <tr>
+                    <thead>
 
-                        <td>01/07/2026</td>
+                        <tr>
 
-                        <td>Strada</td>
+                            <th>Peça</th>
 
-                        <td>Carlos</td>
+                            <th>Qtd.</th>
 
-                        <td>Troca de óleo</td>
+                            <th>Veículo</th>
 
-                        <td>
+                        </tr>
 
-                            <span class="badge bg-success">
+                    </thead>
 
-                                Concluído
+                    <tbody>
 
-                            </span>
+                        <tr>
 
-                        </td>
+                            <td>Pastilha de Freio</td>
 
-                    </tr>
+                            <td>2</td>
 
-                </tbody>
+                            <td>Strada</td>
 
-            </table>
+                        </tr>
+
+                        <tr>
+
+                            <td>Filtro de Óleo</td>
+
+                            <td>1</td>
+
+                            <td>Ambulância</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Pneu</td>
+
+                            <td>2</td>
+
+                            <td>Ônibus</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- COMBUSTÍVEL -->
+
+            <div class="box">
+
+                <h2>
+
+                    <i class="fas fa-gas-pump"></i>
+
+                    Últimos abastecimentos
+
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Veículo</th>
+
+                            <th>Valor</th>
+
+                            <th>KM</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Strada</td>
+
+                            <td>R$ 340</td>
+
+                            <td>102.300</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Ônibus</td>
+
+                            <td>R$ 920</td>
+
+                            <td>248.100</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Ambulância</td>
+
+                            <td>R$ 270</td>
+
+                            <td>74.900</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- FOTOS -->
+
+            <div class="box">
+
+                <h2>
+
+                    <i class="fas fa-camera"></i>
+
+                    Fotos Recentes
+
+                </h2>
+
+                <div class="galeria">
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                    <div class="foto">
+                        📷
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script src="js/app.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
-
 </html>
