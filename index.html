@@ -140,6 +140,15 @@ button.edit:hover{
 .card b{
     font-size:16px;
 }
+.status-disponivel{
+    color: #1e7e34;
+    font-weight: bold;
+}
+
+.status-manutencao{
+    color: #c82333;
+    font-weight: bold;
+}
 </style>
 
 </head>
@@ -193,6 +202,13 @@ button.edit:hover{
 
         <button class="add" onclick="addVeiculo()">Adicionar</button>
     </div>
+    <hr>
+
+<select id="filtroStatus" onchange="renderVeiculos()">
+    <option value="Todos">Todos</option>
+    <option value="Disponível">Disponível</option>
+    <option value="Em manutenção">Em manutenção</option>
+</select>
 
     <div id="listaVeiculos"></div>
 </div>
@@ -286,17 +302,24 @@ function addVeiculo(){
 }
 
 function renderVeiculos(){
+    let filtro = document.getElementById("filtroStatus")?.value || "Todos";
     let html = "";
 
     veiculos.forEach((v,i)=>{
+
+        // filtro
+        if(filtro !== "Todos" && v.status !== filtro){
+            return;
+        }
+
         html += `
         <div class="card">
             <b>${v.nome}</b><br>
             Placa: ${v.placa}<br>
             Secretaria: ${v.secretaria}<br>
-            Situação: ${v.status}<br>
+            Situação: <span class="${v.status === 'Disponível' ? 'status-disponivel' : 'status-manutencao'}">${v.status}</span><br>
 
-            <button class="add" onclick="editarVeiculo(${i})">Editar</button>
+            <button class="edit" onclick="editarVeiculo(${i})">Editar</button>
             <button class="del" onclick="delVeiculo(${i})">X</button>
         </div>`;
     });
