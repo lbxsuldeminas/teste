@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Secretaria de Transportes - CRV </title>
+<title>Secretaria de Transportes</title>
 
 <style>
 body{
@@ -202,14 +202,15 @@ button.edit:hover{
 
         <button class="add" onclick="addVeiculo()">Adicionar</button>
     </div>
-    <hr>
+    <div class="card">
+    <h3>Filtro de Veículos</h3>
 
-<select id="filtroStatus" onchange="renderVeiculos()">
-    <option value="Todos">Todos</option>
-    <option value="Disponível">Disponível</option>
-    <option value="Em manutenção">Em manutenção</option>
-</select>
-
+    <select id="filtroStatus" onchange="renderVeiculos()">
+        <option value="Todos">Todos os veículos</option>
+        <option value="Disponível">Disponíveis</option>
+        <option value="Em manutenção">Em manutenção</option>
+    </select>
+</div>
     <div id="listaVeiculos"></div>
 </div>
 
