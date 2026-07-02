@@ -223,7 +223,97 @@ input, select{
 <script>
     // ===== DADOS =====
 let motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
-let veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
+let veiculos = [
+{nome:"GXV4649", placa:"GXV4649", secretaria:"OBRAS", status:"Disponível"},
+{nome:"PMO1235", placa:"PMO1235", secretaria:"OBRAS", status:"Disponível"},
+{nome:"OWX3076", placa:"OWX3076", secretaria:"OBRAS", status:"Disponível"},
+{nome:"RNA7H13", placa:"RNA7H13", secretaria:"OBRAS", status:"Disponível"},
+{nome:"PMO1242", placa:"PMO1242", secretaria:"OBRAS", status:"Disponível"},
+{nome:"PMO1243", placa:"PMO1243", secretaria:"OBRAS", status:"Disponível"},
+{nome:"PUZ9934", placa:"PUZ9934", secretaria:"OBRAS", status:"Disponível"},
+{nome:"ORC9169", placa:"ORC9169", secretaria:"OBRAS", status:"Disponível"},
+{nome:"TEU8G85", placa:"TEU8G85", secretaria:"OBRAS", status:"Disponível"},
+
+{nome:"HLF7882", placa:"HLF7882", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1240", placa:"PMO1240", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1244", placa:"PMO1244", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PXG8681", placa:"PXG8681", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1246", placa:"PMO1246", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1254", placa:"PMO1254", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1255", placa:"PMO1255", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1256", placa:"PMO1256", secretaria:"AGRICULTURA", status:"Disponível"},
+{nome:"PMO1249", placa:"PMO1249", secretaria:"AGRICULTURA", status:"Em manutenção"},
+
+{nome:"TXY7A44", placa:"TXY7A44", secretaria:"ADMINISTRAÇÃO", status:"Disponível"},
+{nome:"HOH8306", placa:"HOH8306", secretaria:"ADMINISTRAÇÃO", status:"Em manutenção"},
+{nome:"TCU7E95", placa:"TCU7E95", secretaria:"ADMINISTRAÇÃO", status:"Disponível"},
+
+{nome:"NXX1571", placa:"NXX1571", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"OQF8944", placa:"OQF8944", secretaria:"EDUCAÇÃO", status:"Em manutenção"},
+{nome:"GXP4413", placa:"GXP4413", secretaria:"EDUCAÇÃO", status:"Em manutenção"},
+{nome:"RVT5C32", placa:"RVT5C32", secretaria:"EDUCAÇÃO", status:"Em manutenção"},
+{nome:"OQF8912", placa:"OQF8912", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"OQC2216", placa:"OQC2216", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"QOU0725", placa:"QOU0725", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"QPS6916", placa:"QPS6916", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"RTF2B38", placa:"RTF2B38", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"RTF2B05", placa:"RTF2B05", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"RTT5D25", placa:"RTT5D25", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"TXY7A50", placa:"TXY7A50", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"RUJ0F11", placa:"RUJ0F11", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"SHJ4H36", placa:"SHJ4H36", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"SHR4G49", placa:"SHR4G49", secretaria:"EDUCAÇÃO", status:"Disponível"},
+{nome:"SHR4G39", placa:"SHR4G39", secretaria:"EDUCAÇÃO", status:"Disponível"},
+
+{nome:"PYF1583", placa:"PYF1583", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"PYI7214", placa:"PYI7214", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"PZC7719", placa:"PZC7719", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"PZC7680", placa:"PZC7680", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TEP5F76", placa:"TEP5F76", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RTH5I69", placa:"RTH5I69", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"QPD4276", placa:"QPD4276", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"QXY6F79", placa:"QXY6F79", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RFD6D73", placa:"RFD6D73", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RFL6E77", placa:"RFL6E77", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RVO9C95", placa:"RVO9C95", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RVO9C47", placa:"RVO9C47", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RVO9E02", placa:"RVO9E02", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"RVO9C19", placa:"RVO9C19", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TCC7J78", placa:"TCC7J78", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TCF3E92", placa:"TCF3E92", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TEZ7J38", placa:"TEZ7J38", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TEZ7J31", placa:"TEZ7J31", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TXY0F43", placa:"TXY0F43", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TXY0F14", placa:"TXY0F14", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TFE1I68", placa:"TFE1I68", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TEQ7F85", placa:"TEQ7F85", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TXT7A92", placa:"TXT7A92", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TYP7C14", placa:"TYP7C14", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TYP7C22", placa:"TYP7C22", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TEU8G95", placa:"TEU8G95", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TZJ3I60", placa:"TZJ3I60", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"TZJ5B57", placa:"TZJ5B57", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"SYM2E57", placa:"SYM2E57", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"QPU1668", placa:"QPU1668", secretaria:"SAÚDE", status:"Disponível"},
+
+{nome:"QMU9327", placa:"QMU9327", secretaria:"SAÚDE", status:"Em manutenção"},
+{nome:"RVO9D66", placa:"RVO9D66", secretaria:"SAÚDE", status:"Em manutenção"},
+{nome:"RUD7D99", placa:"RUD7D99", secretaria:"SAÚDE", status:"Em manutenção"},
+{nome:"QWR2702", placa:"QWR2702", secretaria:"SAÚDE", status:"Em manutenção"},
+{nome:"QPV1323", placa:"QPV1323", secretaria:"SAÚDE", status:"Em manutenção"},
+
+{nome:"QPS5158", placa:"QPS5158", secretaria:"SAÚDE", status:"Disponível"},
+{nome:"UAC0D48", placa:"UAC0D48", secretaria:"SAÚDE", status:"Disponível"},
+
+{nome:"QUM8998", placa:"QUM8998", secretaria:"GABINETE", status:"Disponível"},
+
+{nome:"RFV7F22", placa:"RFV7F22", secretaria:"ASSISTÊNCIA SOCIAL", status:"Disponível"},
+{nome:"SYW2B15", placa:"SYW2B15", secretaria:"ASSISTÊNCIA SOCIAL", status:"Disponível"},
+{nome:"TEP5F80", placa:"TEP5F80", secretaria:"ASSISTÊNCIA SOCIAL", status:"Disponível"},
+
+{nome:"PZC7715", placa:"PZC7715", secretaria:"CULTURA", status:"Disponível"},
+{nome:"RUT3C37", placa:"RUT3C37", secretaria:"CONSELHO TUTELAR", status:"Disponível"}
+];
 let pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
 let combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
 
