@@ -342,11 +342,22 @@ function atualizarSelectVeiculos(){
 }
 
 // ================= INICIAL =================
-renderMotoristas();
-renderVeiculos();
-renderPecas();
-renderCombustivel();
-atualizarSelectVeiculos();
+function init(){
+    // garante carregamento seguro do localStorage
+    motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
+    veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
+    pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
+    combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
+
+    renderMotoristas();
+    renderVeiculos();
+    renderPecas();
+    renderCombustivel();
+    atualizarSelectVeiculos();
+}
+
+// inicializa tudo corretamente após carregar a página
+window.onload = init;
 
 
 </script>
