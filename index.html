@@ -245,9 +245,20 @@ function addVeiculo(){
 }
 
 function renderVeiculos(){
-    const div = document.getElementById("listaVeiculos");
+    const statusFiltro = document.getElementById("filtroStatus").value;
+    const secretariaFiltro = document.getElementById("filtroSecretaria").value;
 
-    div.innerHTML = veiculos.map(v=>`
+    let lista = veiculos;
+
+    if(statusFiltro !== "Todos" && statusFiltro !== ""){
+        lista = lista.filter(v => v.status === statusFiltro);
+    }
+
+    if(secretariaFiltro !== "Todas" && secretariaFiltro !== ""){
+        lista = lista.filter(v => v.secretaria === secretariaFiltro);
+    }
+
+    document.getElementById("listaVeiculos").innerHTML = lista.map(v=>`
         <div class="card">
             <b>${v.nome}</b><br>
             ${v.placa}<br>
