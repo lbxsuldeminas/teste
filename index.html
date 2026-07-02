@@ -98,6 +98,15 @@ input, select{
 .status-manut{ color:red; font-weight:bold; }
 
 .secao{ display:none; }
+
+.secao{
+    display:none;
+}
+
+.secao.ativa{
+    display:block;
+}
+
 </style>
 </head>
 
@@ -114,7 +123,7 @@ input, select{
 <div class="content">
 
 <!-- MOTORISTAS -->
-<div id="motoristas" class="secao">
+<div id="motoristas" class="secao ativa">
     <div class="card">
         <h3>Motoristas</h3>
         <input id="nomeMotorista" placeholder="Nome">
@@ -327,10 +336,19 @@ function salvar(){
 
 // ===== NAVEGAÇÃO =====
 function mostrar(secao){
-    document.querySelectorAll(".secao").forEach(s=>s.style.display="none");
-    document.getElementById(secao).style.display="block";
-}
+    document.querySelectorAll(".secao").forEach(s=>{
+        s.classList.remove("ativa");
+    });
 
+    const el = document.getElementById(secao);
+    if (el) el.classList.add("ativa");
+
+    // 🔥 força render das abas
+    if (secao === "pecas") renderPecas();
+    if (secao === "combustivel") renderCombustivel();
+    if (secao === "veiculos") renderVeiculos();
+    if (secao === "motoristas") renderMotoristas();
+}
 // ===== MOTORISTAS =====
 function addMotorista(){
     let nome = nomeMotorista.value;
