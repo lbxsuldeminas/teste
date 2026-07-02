@@ -205,26 +205,24 @@ button.edit:hover{
         <button class="add" onclick="addVeiculo()">Adicionar</button>
     </div>
     <div class="card">
-    <h3>Filtro de Veículos</h3>
+    <h3>Filtro por veículo</h3>
 
-    <select id="filtroStatus" onchange="renderVeiculos()">
-        <option value="Todos">Todos os veículos</option>
-        <option value="Disponível">Disponíveis</option>
-        <option value="Em manutenção">Em manutenção</option>
+    <select id="filtroCombSecretaria" onchange="carregarFiltroVeiculos(); renderCombustivel()">
+        <option value="todas">Todas as secretarias</option>
+        <option>Administração</option>
+        <option>Agricultura</option>
+        <option>Assistência Social</option>
+        <option>Cultura</option>
+        <option>Educação</option>
+        <option>Gabinete</option>
+        <option>Obras</option>
+        <option>Saúde</option>
+        <option>Conselho Tutelar</option>
     </select>
 
-        <select id="filtroSecretaria" onchange="renderVeiculos()">
-    <option value="Todas">Todas as secretarias</option>
-    <option>Agricultura</option>
-    <option>Administração</option>
-    <option>Assistência Social</option>
-    <option>Cultura</option>
-    <option>Educação</option>
-    <option>Gabinete</option>
-    <option>Obras</option>
-    <option>Saúde</option>
-    <option>Conselho Tutelar</option>
-</select>
+    <select id="filtroCombVeiculo" onchange="renderCombustivel()">
+        <option value="todos">Todos os veículos</option>
+    </select>
 </div>
     <div id="listaVeiculos"></div>
 </div>
@@ -468,19 +466,22 @@ function delPeca(i){
 }
 
 function renderCombustivel(){
-    let filtro = document.getElementById("filtroCombVeiculo")?.value || "todos";
+    let filtroVeiculo = document.getElementById("filtroCombVeiculo")?.value || "todos";
+    let secretaria = document.getElementById("filtroCombSecretaria")?.value || "todas";
 
     let html = "";
 
     combustivel.forEach((c,i)=>{
 
-        if(filtro !== "todos" && c.veiculo !== filtro) return;
-
         let v = veiculos.find(v => v.placa === c.veiculo);
+
+        if(secretaria !== "todas" && v?.secretaria !== secretaria) return;
+        if(filtroVeiculo !== "todos" && c.veiculo !== filtroVeiculo) return;
 
         html += `
         <div class="card">
             <b>Veículo:</b> ${v ? v.nome + " - " + v.placa : c.veiculo}<br>
+            <b>Secretaria:</b> ${v ? v.secretaria : "N/A"}<br>
             <b>Data:</b> ${c.data}<br>
             <b>Valor:</b> R$ ${c.valor}<br>
             <b>KM:</b> ${c.km}<br>
@@ -512,12 +513,30 @@ function delCombustivel(i){
     });
 }
 
+        function carregarFiltroVeiculos(){
+    let secretaria = document.getElementById("filtroCombSecretaria").value;
+    let filtroVeiculo = document.getElementById("filtroCombVeiculo");
+
+    filtroVeiculo.innerHTML = `<option value="todos">Todos os veículos</option>`;
+
+    veiculos.forEach(v=>{
+        if(secretaria === "todas" || v.secretaria === secretaria){
+            filtroVeiculo.innerHTML += `
+                <option value="${v.placa}">
+                    ${v.nome} - ${v.placa}
+                </option>
+            `;
+        }
+    });
+}
+
 // ====== INICIALIZAÇÃO ======
 renderMotoristas();
 renderVeiculos();
 renderPecas();
 renderCombustivel();
 carregarVeiculosComb();
+carregarFiltroVeiculos();
         
 mostrar('motoristas');
 </script>
