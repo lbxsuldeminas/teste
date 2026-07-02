@@ -261,28 +261,66 @@ function salvar(){
 }
 
 // ====== MOTORISTAS ======
-function addMotorista(){
-    let nome = document.getElementById("nomeMotorista").value;
-    if(nome){
-        motoristas.push(nome);
-        salvar();
-        renderMotoristas();
-    }
-}
-
 function renderMotoristas(){
     let html = "";
+
     motoristas.forEach((m,i)=>{
-        html += `<div class="card">${m}
-        <button class="del" onclick="delMotorista(${i})">X</button></div>`;
+
+        let veiculoInfo = veiculos.find(v => v.placa === m.veiculo);
+
+        html += `
+        <div class="card">
+            <b>${m.nome}</b><br>
+
+            Veículo:
+            <select onchange="atualizarVeiculoMotorista(${i}, this.value)">
+                <option value="">Sem veículo</option>
+
+                ${veiculos.map(v => `
+                    <option value="${v.placa}" ${m.veiculo === v.placa ? "selected" : ""}>
+                        ${v.nome} - ${v.placa}
+                    </option>
+                `).join("")}
+            </select>
+
+            <br>
+
+            ${veiculoInfo ? `
+                <small>🚗 ${veiculoInfo.nome} (${veiculoInfo.placa})</small>
+            ` : `<small>Sem veículo atribuído</small>`}
+
+            <button class="del" onclick="delMotorista(${i})">X</button>
+        </div>`;
     });
+
     document.getElementById("listaMotoristas").innerHTML = html;
 }
 
+      function atualizarVeiculoMotorista(i, valor){
+    motoristas[i].veiculo = valor;
+    salvar();
+    renderMotoristas();
+}
 function delMotorista(i){
     motoristas.splice(i,1);
     salvar();
     renderMotoristas();
+}
+
+        function addMotorista(){
+    let nome = document.getElementById("nomeMotorista").value;
+
+    if(nome){
+        motoristas.push({
+            nome: nome,
+            veiculo: ""
+        });
+
+        salvar();
+        renderMotoristas();
+
+        document.getElementById("nomeMotorista").value = "";
+    }
 }
 
 // ====== VEICULOS ======
