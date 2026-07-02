@@ -296,18 +296,7 @@ function renderMotoristas(){
     document.getElementById("listaMotoristas").innerHTML = html;
 }
 
-      function atualizarVeiculoMotorista(i, valor){
-    motoristas[i].veiculo = valor;
-    salvar();
-    renderMotoristas();
-}
-function delMotorista(i){
-    motoristas.splice(i,1);
-    salvar();
-    renderMotoristas();
-}
-
-        function addMotorista(){
+function addMotorista(){
     let nome = document.getElementById("nomeMotorista").value;
 
     if(nome){
@@ -323,7 +312,19 @@ function delMotorista(i){
     }
 }
 
-// ====== VEICULOS ======
+function atualizarVeiculoMotorista(i, valor){
+    motoristas[i].veiculo = valor;
+    salvar();
+    renderMotoristas();
+}
+
+function delMotorista(i){
+    motoristas.splice(i,1);
+    salvar();
+    renderMotoristas();
+}
+
+// ====== VEÍCULOS ======
 let editIndex = null;
 
 function addVeiculo(){
@@ -346,13 +347,13 @@ function addVeiculo(){
         salvar();
         renderVeiculos();
 
-        // limpar campos
         document.getElementById("nomeVeiculo").value = "";
         document.getElementById("placaVeiculo").value = "";
         document.getElementById("secretariaVeiculo").value = "";
         document.getElementById("statusVeiculo").value = "";
     }
 }
+
 function renderVeiculos(){
     let filtroStatus = document.getElementById("filtroStatus")?.value || "Todos";
     let filtroSecretaria = document.getElementById("filtroSecretaria")?.value || "Todas";
@@ -361,15 +362,8 @@ function renderVeiculos(){
 
     veiculos.forEach((v,i)=>{
 
-        // filtro status
-        if(filtroStatus !== "Todos" && v.status !== filtroStatus){
-            return;
-        }
-
-        // filtro secretaria
-        if(filtroSecretaria !== "Todas" && v.secretaria !== filtroSecretaria){
-            return;
-        }
+        if(filtroStatus !== "Todos" && v.status !== filtroStatus) return;
+        if(filtroSecretaria !== "Todas" && v.secretaria !== filtroSecretaria) return;
 
         html += `
         <div class="card">
@@ -403,7 +397,7 @@ function delVeiculo(i){
     renderVeiculos();
 }
 
-// ====== PECAS ======
+// ====== PEÇAS ======
 function addPeca(){
     let nome = document.getElementById("nomePeca").value;
     if(nome){
@@ -432,7 +426,6 @@ function delPeca(i){
 renderMotoristas();
 renderVeiculos();
 renderPecas();
-
 </script>
 </body>
 </html>
