@@ -13,39 +13,34 @@ body{
     color:#333;
 }
 
-/* MENU LATERAL */
+/* MENU */
 .menu{
     width:240px;
     background:linear-gradient(180deg,#1e2a38,#17202b);
     color:white;
     height:100vh;
     padding:20px;
-    box-shadow:2px 0 10px rgba(0,0,0,0.2);
 }
 
 .menu h2{
     font-size:20px;
-    margin-bottom:25px;
     text-align:center;
-    letter-spacing:1px;
+    margin-bottom:20px;
 }
 
 .menu button{
     width:100%;
-    margin-bottom:12px;
+    margin-bottom:10px;
     padding:12px;
     border:none;
-    cursor:pointer;
     border-radius:8px;
+    cursor:pointer;
     background:#2f435a;
     color:white;
-    font-size:14px;
-    transition:0.2s;
 }
 
 .menu button:hover{
     background:#3d5a78;
-    transform:scale(1.03);
 }
 
 /* CONTEÚDO */
@@ -54,109 +49,62 @@ body{
     padding:25px;
 }
 
-/* CARDS */
+/* CARD */
 .card{
     background:white;
-    padding:18px;
+    padding:15px;
     border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.08);
     margin-bottom:15px;
-    transition:0.2s;
-}
-
-.card:hover{
-    transform:translateY(-2px);
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
 }
 
 /* INPUTS */
 input, select{
     padding:10px;
-    margin:6px 5px;
-    border:1px solid #ccc;
+    margin:5px;
     border-radius:8px;
-    outline:none;
-    width:180px;
+    border:1px solid #ccc;
 }
 
-input:focus, select:focus{
-    border-color:#2f435a;
-}
-
-/* BOTÃO ADICIONAR */
-button.add{
+/* BOTÕES */
+.add{
     background:#28a745;
     color:white;
     border:none;
-    padding:10px 14px;
-    cursor:pointer;
+    padding:10px;
     border-radius:8px;
-    font-size:13px;
-    min-width:120px;
-    transition:0.2s;
+    cursor:pointer;
 }
 
-button.add:hover{
-    background:#218838;
-    transform:scale(1.03);
-}
-
-/* BOTÃO EXCLUIR */
-button.del{
+.del{
     background:#dc3545;
     color:white;
     border:none;
-    padding:6px 10px;
-    cursor:pointer;
+    padding:5px 8px;
     border-radius:6px;
-    font-size:12px;
-    margin-left:8px;
-    transition:0.2s;
+    cursor:pointer;
 }
 
-button.del:hover{
-    background:#c82333;
-    transform:scale(1.05);
-}
-
-/* BOTÃO EDITAR */
-button.edit{
+.edit{
     background:#007bff;
     color:white;
     border:none;
-    padding:6px 10px;
-    cursor:pointer;
+    padding:5px 8px;
     border-radius:6px;
-    font-size:12px;
-    margin-left:8px;
-    transition:0.2s;
+    cursor:pointer;
 }
 
-button.edit:hover{
-    background:#0069d9;
-    transform:scale(1.05);
-}
+.status-ok{ color:green; font-weight:bold; }
+.status-manut{ color:red; font-weight:bold; }
 
-/* LISTA */
-.card b{
-    font-size:16px;
-}
-.status-disponivel{
-    color: #1e7e34;
-    font-weight: bold;
-}
-
-.status-manutencao{
-    color: #c82333;
-    font-weight: bold;
-}
+.secao{ display:none; }
 </style>
-
 </head>
 
 <body>
 
 <div class="menu">
-    <h2>Secretaria de Transportes</h2>
+    <h2>Transportes</h2>
     <button onclick="mostrar('motoristas')">Motoristas</button>
     <button onclick="mostrar('veiculos')">Veículos</button>
     <button onclick="mostrar('pecas')">Peças</button>
@@ -169,53 +117,23 @@ button.edit:hover{
 <div id="motoristas" class="secao">
     <div class="card">
         <h3>Motoristas</h3>
-        <input id="nomeMotorista" placeholder="Nome do motorista">
+        <input id="nomeMotorista" placeholder="Nome">
         <button class="add" onclick="addMotorista()">Adicionar</button>
     </div>
     <div id="listaMotoristas"></div>
 </div>
 
-<!-- VEICULOS -->
-<div id="veiculos" class="secao" style="display:none;">
+<!-- VEÍCULOS -->
+<div id="veiculos" class="secao">
+
     <div class="card">
         <h3>Veículos</h3>
 
-        <input id="nomeVeiculo" placeholder="Nome do veículo">
+        <input id="nomeVeiculo" placeholder="Nome">
         <input id="placaVeiculo" placeholder="Placa">
 
-<select id="secretariaVeiculo">
-    <option value="">Secretaria</option>
-    <option>Administração</option>
-    <option>Agricultura</option>
-    <option>Assistência Social</option>
-    <option>Cultura</option>
-    <option>Educação</option>
-    <option>Gabinete</option>
-    <option>Obras</option>
-    <option>Saúde</option>
-    <option>Conselho Tutelar</option>
-</select>
-
-        <select id="statusVeiculo">
-            <option value="">Situação</option>
-            <option>Disponível</option>
-            <option>Em manutenção</option>
-        </select>
-
-        <button class="add" onclick="addVeiculo()">Adicionar</button>
-    </div>
-    <div class="card">
-    <h3>Filtro por veículo</h3>
-
-<!-- COMBUSTÍVEL -->
-<!-- COMBUSTÍVEL -->
-<div id="combustivel" class="secao" style="display:none;">
-
-    <div class="card">
-        <h3>Gastos com Combustível</h3>
-
-        <select id="filtroCombSecretaria" onchange="carregarFiltroVeiculos(); renderCombustivel()">
-            <option value="todas">Todas as secretarias</option>
+        <select id="secretariaVeiculo">
+            <option value="">Secretaria</option>
             <option>Administração</option>
             <option>Agricultura</option>
             <option>Assistência Social</option>
@@ -227,53 +145,88 @@ button.edit:hover{
             <option>Conselho Tutelar</option>
         </select>
 
-        <select id="veiculoComb">
-            <option value="">Selecione o veículo</option>
+        <select id="statusVeiculo">
+            <option value="">Situação</option>
+            <option>Disponível</option>
+            <option>Em manutenção</option>
         </select>
 
-        <input id="dataComb" type="date">
-        <input id="valorComb" placeholder="Valor (R$)">
+        <button class="add" onclick="addVeiculo()">Adicionar</button>
+    </div>
+
+    <!-- FILTROS VEÍCULOS -->
+    <div class="card">
+        <h3>Filtros</h3>
+
+        <select id="filtroStatus" onchange="renderVeiculos()">
+            <option>Todos</option>
+            <option>Disponível</option>
+            <option>Em manutenção</option>
+        </select>
+
+        <select id="filtroSecretaria" onchange="renderVeiculos()">
+            <option>Todas</option>
+            <option>Administração</option>
+            <option>Agricultura</option>
+            <option>Assistência Social</option>
+            <option>Cultura</option>
+            <option>Educação</option>
+            <option>Gabinete</option>
+            <option>Obras</option>
+            <option>Saúde</option>
+            <option>Conselho Tutelar</option>
+        </select>
+    </div>
+
+    <div id="listaVeiculos"></div>
+</div>
+
+<!-- PEÇAS -->
+<div id="pecas" class="secao">
+    <div class="card">
+        <h3>Peças</h3>
+        <input id="nomePeca" placeholder="Nome peça">
+        <button class="add" onclick="addPeca()">Adicionar</button>
+    </div>
+    <div id="listaPecas"></div>
+</div>
+
+<!-- COMBUSTÍVEL -->
+<div id="combustivel" class="secao">
+
+    <div class="card">
+        <h3>Combustível</h3>
+
+        <select id="filtroCombSecretaria" onchange="carregarFiltroVeiculos(); renderCombustivel()">
+            <option value="todas">Todas secretarias</option>
+        </select>
+
+        <select id="veiculoComb"></select>
+
+        <input type="date" id="dataComb">
+        <input id="valorComb" placeholder="Valor">
         <input id="kmComb" placeholder="KM">
 
         <button class="add" onclick="addCombustivel()">Adicionar</button>
     </div>
 
     <div class="card">
-        <h3>Filtros</h3>
-
+        <h3>Filtro veículos</h3>
         <select id="filtroCombVeiculo" onchange="renderCombustivel()">
-            <option value="todos">Todos os veículos</option>
+            <option value="todos">Todos</option>
         </select>
     </div>
 
     <div id="listaCombustivel"></div>
-
-</div>
-<!-- PECAS -->
-<div id="pecas" class="secao" style="display:none;">
-    <div class="card">
-        <h3>Peças</h3>
-        <input id="nomePeca" placeholder="Nome da peça">
-        <button class="add" onclick="addPeca()">Adicionar</button>
-    </div>
-    <div id="listaPecas"></div>
 </div>
 
-    <script>
-
-// ====== NAVEGAÇÃO ======
-function mostrar(secao){
-    document.querySelectorAll(".secao").forEach(s => s.style.display="none");
-    document.getElementById(secao).style.display="block";
-}
-
-// ====== LOCALSTORAGE ======
+<script>
+    // ===== DADOS =====
 let motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
 let veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
 let pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
 let combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
 
-// ====== SALVAR ======
 function salvar(){
     localStorage.setItem("motoristas", JSON.stringify(motoristas));
     localStorage.setItem("veiculos", JSON.stringify(veiculos));
@@ -281,60 +234,44 @@ function salvar(){
     localStorage.setItem("combustivel", JSON.stringify(combustivel));
 }
 
-// ====== MOTORISTAS ======
+// ===== NAVEGAÇÃO =====
+function mostrar(secao){
+    document.querySelectorAll(".secao").forEach(s=>s.style.display="none");
+    document.getElementById(secao).style.display="block";
+}
+
+// ===== MOTORISTAS =====
+function addMotorista(){
+    let nome = nomeMotorista.value;
+    if(!nome) return;
+
+    motoristas.push({nome, veiculo:""});
+    salvar();
+    renderMotoristas();
+    nomeMotorista.value="";
+}
+
 function renderMotoristas(){
-    let html = "";
-
-    motoristas.forEach((m,i)=>{
-
-        let veiculoInfo = veiculos.find(v => v.placa === m.veiculo);
-
-        html += `
+    listaMotoristas.innerHTML = motoristas.map((m,i)=>`
         <div class="card">
             <b>${m.nome}</b><br>
 
-            Veículo:
-            <select onchange="atualizarVeiculoMotorista(${i}, this.value)">
+            <select onchange="atualizarMotorista(${i}, this.value)">
                 <option value="">Sem veículo</option>
-
-                ${veiculos.map(v => `
-                    <option value="${v.placa}" ${m.veiculo === v.placa ? "selected" : ""}>
+                ${veiculos.map(v=>`
+                    <option value="${v.placa}" ${m.veiculo===v.placa?"selected":""}>
                         ${v.nome} - ${v.placa}
                     </option>
                 `).join("")}
             </select>
 
-            <br>
-
-            ${veiculoInfo ? `
-                <small>🚗 ${veiculoInfo.nome} (${veiculoInfo.placa})</small>
-            ` : `<small>Sem veículo atribuído</small>`}
-
             <button class="del" onclick="delMotorista(${i})">X</button>
-        </div>`;
-    });
-
-    document.getElementById("listaMotoristas").innerHTML = html;
+        </div>
+    `).join("");
 }
 
-function addMotorista(){
-    let nome = document.getElementById("nomeMotorista").value;
-
-    if(nome){
-        motoristas.push({
-            nome: nome,
-            veiculo: ""
-        });
-
-        salvar();
-        renderMotoristas();
-
-        document.getElementById("nomeMotorista").value = "";
-    }
-}
-
-function atualizarVeiculoMotorista(i, valor){
-    motoristas[i].veiculo = valor;
+function atualizarMotorista(i,v){
+    motoristas[i].veiculo=v;
     salvar();
     renderMotoristas();
 }
@@ -345,71 +282,55 @@ function delMotorista(i){
     renderMotoristas();
 }
 
-// ====== VEÍCULOS ======
-let editIndex = null;
+// ===== VEÍCULOS =====
+let edit=null;
 
 function addVeiculo(){
-    let nome = document.getElementById("nomeVeiculo").value;
-    let placa = document.getElementById("placaVeiculo").value;
-    let secretaria = document.getElementById("secretariaVeiculo").value;
-    let status = document.getElementById("statusVeiculo").value;
+    let v={
+        nome:nomeVeiculo.value,
+        placa:placaVeiculo.value,
+        secretaria:secretariaVeiculo.value,
+        status:statusVeiculo.value
+    };
 
-    if(nome && placa && secretaria && status){
+    if(!v.nome||!v.placa) return;
 
-        let veiculo = { nome, placa, secretaria, status };
+    if(edit===null) veiculos.push(v);
+    else veiculos[edit]=v, edit=null;
 
-        if(editIndex === null){
-            veiculos.push(veiculo);
-        } else {
-            veiculos[editIndex] = veiculo;
-            editIndex = null;
-        }
-
-        salvar();
-        renderVeiculos();
-
-        document.getElementById("nomeVeiculo").value = "";
-        document.getElementById("placaVeiculo").value = "";
-        document.getElementById("secretariaVeiculo").value = "";
-        document.getElementById("statusVeiculo").value = "";
-    }
+    salvar();
+    renderVeiculos();
 }
 
 function renderVeiculos(){
-    let filtroStatus = document.getElementById("filtroStatus")?.value || "Todos";
-    let filtroSecretaria = document.getElementById("filtroSecretaria")?.value || "Todas";
+    let s1=filtroStatus.value;
+    let s2=filtroSecretaria.value;
 
-    let html = "";
-
-    veiculos.forEach((v,i)=>{
-
-        if(filtroStatus !== "Todos" && v.status !== filtroStatus) return;
-        if(filtroSecretaria !== "Todas" && v.secretaria !== filtroSecretaria) return;
-
-        html += `
+    listaVeiculos.innerHTML = veiculos
+    .filter(v=>{
+        return (s1==="Todos"||v.status===s1) &&
+               (s2==="Todas"||v.secretaria===s2);
+    })
+    .map((v,i)=>`
         <div class="card">
             <b>${v.nome}</b><br>
-            Placa: ${v.placa}<br>
-            Secretaria: ${v.secretaria}<br>
-            Situação: <span class="${v.status === 'Disponível' ? 'status-disponivel' : 'status-manutencao'}">${v.status}</span><br>
+            ${v.placa}<br>
+            ${v.secretaria}<br>
+            <span class="${v.status==="Disponível"?"status-ok":"status-manut"}">${v.status}</span><br>
 
-            <button class="edit" onclick="editarVeiculo(${i})">Editar</button>
+            <button class="edit" onclick="editar(${i})">Editar</button>
             <button class="del" onclick="delVeiculo(${i})">X</button>
-        </div>`;
-    });
-
-    document.getElementById("listaVeiculos").innerHTML = html;
+        </div>
+    `).join("");
 }
 
-function editarVeiculo(i){
-    let v = veiculos[i];
-
-    document.getElementById("nomeVeiculo").value = v.nome;
-    document.getElementById("placaVeiculo").value = v.placa;
-    document.getElementById("secretariaVeiculo").value = v.secretaria;
-    document.getElementById("statusVeiculo").value = v.status;
-
-    editIndex = i;
+function editar(i){
+    let v=veiculos[i];
+    nomeVeiculo.value=v.nome;
+    placaVeiculo.value=v.placa;
+    secretariaVeiculo.value=v.secretaria;
+    statusVeiculo.value=v.status;
+    edit=i;
 }
 
 function delVeiculo(i){
@@ -418,23 +339,21 @@ function delVeiculo(i){
     renderVeiculos();
 }
 
-// ====== PEÇAS ======
+// ===== PEÇAS =====
 function addPeca(){
-    let nome = document.getElementById("nomePeca").value;
-    if(nome){
-        pecas.push(nome);
-        salvar();
-        renderPecas();
-    }
+    if(!nomePeca.value) return;
+    pecas.push(nomePeca.value);
+    salvar();
+    renderPecas();
 }
 
 function renderPecas(){
-    let html = "";
-    pecas.forEach((p,i)=>{
-        html += `<div class="card">${p}
-        <button class="del" onclick="delPeca(${i})">X</button></div>`;
-    });
-    document.getElementById("listaPecas").innerHTML = html;
+    listaPecas.innerHTML = pecas.map((p,i)=>`
+        <div class="card">
+            ${p}
+            <button class="del" onclick="delPeca(${i})">X</button>
+        </div>
+    `).join("");
 }
 
 function delPeca(i){
@@ -443,154 +362,38 @@ function delPeca(i){
     renderPecas();
 }
 
-        function addCombustivel(){
-    let veiculo = document.getElementById("veiculoComb").value;
-    let data = document.getElementById("dataComb").value;
-    let valor = document.getElementById("valorComb").value;
-    let km = document.getElementById("kmComb").value;
-
-    if(veiculo && data && valor && km){
-        combustivel.push({ veiculo, data, valor, km });
-        salvar();
-        renderCombustivel();
-
-        document.getElementById("dataComb").value = "";
-        document.getElementById("valorComb").value = "";
-        document.getElementById("kmComb").value = "";
-    }
-}
-
-function renderCombustivel(){
-    let filtroVeiculo = document.getElementById("filtroCombVeiculo")?.value || "todos";
-    let secretaria = document.getElementById("filtroCombSecretaria")?.value || "todas";
-
-    let html = "";
-
-    combustivel.forEach((c,i)=>{
-
-        let v = veiculos.find(v => v.placa === c.veiculo);
-
-        if(secretaria !== "todas" && v?.secretaria !== secretaria) return;
-        if(filtroVeiculo !== "todos" && c.veiculo !== filtroVeiculo) return;
-
-        html += `
-        <div class="card">
-            <b>Veículo:</b> ${v ? v.nome + " - " + v.placa : c.veiculo}<br>
-            <b>Secretaria:</b> ${v ? v.secretaria : "N/A"}<br>
-            <b>Data:</b> ${c.data}<br>
-            <b>Valor:</b> R$ ${c.valor}<br>
-            <b>KM:</b> ${c.km}<br>
-
-            <button class="del" onclick="delCombustivel(${i})">X</button>
-        </div>
-        `;
+// ===== COMBUSTÍVEL =====
+function addCombustivel(){
+    combustivel.push({
+        veiculo:veiculoComb.value,
+        data:dataComb.value,
+        valor:valorComb.value,
+        km:kmComb.value
     });
 
-    document.getElementById("listaCombustivel").innerHTML = html;
-}
-
-function delCombustivel(i){
-    combustivel.splice(i,1);
     salvar();
     renderCombustivel();
 }
 
-        function carregarVeiculosComb(){
-    let sel = document.getElementById("veiculoComb");
-    let filtro = document.getElementById("filtroCombVeiculo");
-
-    sel.innerHTML = `<option value="">Selecione o veículo</option>`;
-    filtro.innerHTML = `<option value="todos">Todos os veículos</option>`;
-
-    veiculos.forEach(v=>{
-        sel.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
-        filtro.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
-    });
-}
-
-        function carregarFiltroVeiculos(){
-    let secretaria = document.getElementById("filtroCombSecretaria").value;
-    let filtroVeiculo = document.getElementById("filtroCombVeiculo");
-
-    filtroVeiculo.innerHTML = `<option value="todos">Todos os veículos</option>`;
-
-    veiculos.forEach(v=>{
-        if(secretaria === "todas" || v.secretaria === secretaria){
-            filtroVeiculo.innerHTML += `
-                <option value="${v.placa}">
-                    ${v.nome} - ${v.placa}
-                </option>
-            `;
-        }
-    });
-}
-
-        function carregarVeiculosComb(){
-    let sel = document.getElementById("veiculoComb");
-    let filtro = document.getElementById("filtroCombVeiculo");
-
-    sel.innerHTML = `<option value="">Selecione o veículo</option>`;
-    filtro.innerHTML = `<option value="todos">Todos os veículos</option>`;
-
-    veiculos.forEach(v=>{
-        sel.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
-        filtro.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
-    });
-}
-
-function carregarFiltroVeiculos(){
-    let secretaria = document.getElementById("filtroCombSecretaria").value;
-    let filtroVeiculo = document.getElementById("filtroCombVeiculo");
-
-    filtroVeiculo.innerHTML = `<option value="todos">Todos os veículos</option>`;
-
-    veiculos.forEach(v=>{
-        if(secretaria === "todas" || v.secretaria === secretaria){
-            filtroVeiculo.innerHTML += `
-                <option value="${v.placa}">
-                    ${v.nome} - ${v.placa}
-                </option>
-            `;
-        }
-    });
-}
-
 function renderCombustivel(){
-    let filtroVeiculo = document.getElementById("filtroCombVeiculo")?.value || "todos";
-    let secretaria = document.getElementById("filtroCombSecretaria")?.value || "todas";
+    listaCombustivel.innerHTML = combustivel.map(c=>{
+        let v=veiculos.find(x=>x.placa===c.veiculo);
 
-    let html = "";
-
-    combustivel.forEach((c,i)=>{
-
-        let v = veiculos.find(v => v.placa === c.veiculo);
-
-        if(secretaria !== "todas" && v?.secretaria !== secretaria) return;
-        if(filtroVeiculo !== "todos" && c.veiculo !== filtroVeiculo) return;
-
-        html += `
+        return `
         <div class="card">
-            <b>Veículo:</b> ${v ? v.nome + " - " + v.placa : c.veiculo}<br>
-            <b>Secretaria:</b> ${v ? v.secretaria : "N/A"}<br>
-            <b>Data:</b> ${c.data}<br>
-            <b>Valor:</b> R$ ${c.valor}<br>
-            <b>KM:</b> ${c.km}<br>
-
-            <button class="del" onclick="delCombustivel(${i})">X</button>
+            ${v? v.nome+" - "+v.placa : c.veiculo}<br>
+            ${c.data} | R$ ${c.valor} | KM ${c.km}
         </div>`;
-    });
-
-    document.getElementById("listaCombustivel").innerHTML = html;
+    }).join("");
 }
 
-// ====== INICIALIZAÇÃO ======
+// ===== INICIAL =====
 renderMotoristas();
 renderVeiculos();
 renderPecas();
 renderCombustivel();
-carregarVeiculosComb();
-carregarFiltroVeiculos();
-mostrar('motoristas');
+mostrar("motoristas");
 </script>
+
 </body>
 </html>
