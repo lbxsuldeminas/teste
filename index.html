@@ -160,6 +160,7 @@ button.edit:hover{
     <button onclick="mostrar('motoristas')">Motoristas</button>
     <button onclick="mostrar('veiculos')">Veículos</button>
     <button onclick="mostrar('pecas')">Peças</button>
+    <button onclick="mostrar('combustivel')">Combustível</button>
 </div>
 
 <div class="content">
@@ -238,6 +239,21 @@ button.edit:hover{
     <div id="listaPecas"></div>
 </div>
 
+    <!-- COMBUSTÍVEL -->
+<div id="combustivel" class="secao" style="display:none;">
+    <div class="card">
+        <h3>Gastos com Combustível</h3>
+
+        <input id="dataComb" type="date">
+        <input id="valorComb" placeholder="Valor (R$)">
+        <input id="kmComb" placeholder="KM do veículo">
+
+        <button class="add" onclick="addCombustivel()">Adicionar</button>
+    </div>
+
+    <div id="listaCombustivel"></div>
+</div>
+
 </div>
 
     <script>
@@ -252,12 +268,14 @@ function mostrar(secao){
 let motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
 let veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
 let pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
+let combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
 
 // ====== SALVAR ======
 function salvar(){
     localStorage.setItem("motoristas", JSON.stringify(motoristas));
     localStorage.setItem("veiculos", JSON.stringify(veiculos));
     localStorage.setItem("pecas", JSON.stringify(pecas));
+    localStorage.setItem("combustivel", JSON.stringify(combustivel));
 }
 
 // ====== MOTORISTAS ======
@@ -422,10 +440,53 @@ function delPeca(i){
     renderPecas();
 }
 
+        function addCombustivel(){
+    let data = document.getElementById("dataComb").value;
+    let valor = document.getElementById("valorComb").value;
+    let km = document.getElementById("kmComb").value;
+
+    if(data && valor && km){
+        combustivel.push({ data, valor, km });
+        salvar();
+        renderCombustivel();
+
+        document.getElementById("dataComb").value = "";
+        document.getElementById("valorComb").value = "";
+        document.getElementById("kmComb").value = "";
+    }
+}
+
+function renderCombustivel(){
+    let html = "";
+
+    combustivel.forEach((c,i)=>{
+        html += `
+        <div class="card">
+            <b>Data:</b> ${c.data}<br>
+            <b>Valor:</b> R$ ${c.valor}<br>
+            <b>KM:</b> ${c.km}<br>
+
+            <button class="del" onclick="delCombustivel(${i})">X</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("listaCombustivel").innerHTML = html;
+}
+
+function delCombustivel(i){
+    combustivel.splice(i,1);
+    salvar();
+    renderCombustivel();
+}
+
 // ====== INICIALIZAÇÃO ======
 renderMotoristas();
 renderVeiculos();
 renderPecas();
+renderCombustivel();
+        
+mostrar('motoristas');
 </script>
 </body>
 </html>
