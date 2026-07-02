@@ -211,6 +211,19 @@ button.edit:hover{
         <option value="Disponível">Disponíveis</option>
         <option value="Em manutenção">Em manutenção</option>
     </select>
+
+        <select id="filtroSecretaria" onchange="renderVeiculos()">
+    <option value="Todas">Todas as secretarias</option>
+    <option>Agricultura</option>
+    <option>Administração</option>
+    <option>Assistência Social</option>
+    <option>Cultura</option>
+    <option>Educação</option>
+    <option>Gabinete</option>
+    <option>Obras</option>
+    <option>Saúde</option>
+    <option>Conselho Tutelar</option>
+</select>
 </div>
     <div id="listaVeiculos"></div>
 </div>
@@ -302,15 +315,21 @@ function addVeiculo(){
         document.getElementById("statusVeiculo").value = "";
     }
 }
-
 function renderVeiculos(){
-    let filtro = document.getElementById("filtroStatus")?.value || "Todos";
+    let filtroStatus = document.getElementById("filtroStatus")?.value || "Todos";
+    let filtroSecretaria = document.getElementById("filtroSecretaria")?.value || "Todas";
+
     let html = "";
 
     veiculos.forEach((v,i)=>{
 
-        // filtro
-        if(filtro !== "Todos" && v.status !== filtro){
+        // filtro status
+        if(filtroStatus !== "Todos" && v.status !== filtroStatus){
+            return;
+        }
+
+        // filtro secretaria
+        if(filtroSecretaria !== "Todas" && v.secretaria !== filtroSecretaria){
             return;
         }
 
