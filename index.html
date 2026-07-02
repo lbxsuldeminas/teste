@@ -244,6 +244,10 @@ button.edit:hover{
     <div class="card">
         <h3>Gastos com Combustível</h3>
 
+        <select id="veiculoComb">
+            <option value="">Selecione o veículo</option>
+        </select>
+
         <input id="dataComb" type="date">
         <input id="valorComb" placeholder="Valor (R$)">
         <input id="kmComb" placeholder="KM do veículo">
@@ -251,9 +255,15 @@ button.edit:hover{
         <button class="add" onclick="addCombustivel()">Adicionar</button>
     </div>
 
-    <div id="listaCombustivel"></div>
-</div>
+    <div class="card">
+        <h3>Filtro por veículo</h3>
 
+        <select id="filtroCombVeiculo" onchange="renderCombustivel()">
+            <option value="todos">Todos os veículos</option>
+        </select>
+    </div>
+
+    <div id="listaCombustivel"></div>
 </div>
 
     <script>
@@ -441,12 +451,13 @@ function delPeca(i){
 }
 
         function addCombustivel(){
+    let veiculo = document.getElementById("veiculoComb").value;
     let data = document.getElementById("dataComb").value;
     let valor = document.getElementById("valorComb").value;
     let km = document.getElementById("kmComb").value;
 
-    if(data && valor && km){
-        combustivel.push({ data, valor, km });
+    if(veiculo && data && valor && km){
+        combustivel.push({ veiculo, data, valor, km });
         salvar();
         renderCombustivel();
 
@@ -457,11 +468,19 @@ function delPeca(i){
 }
 
 function renderCombustivel(){
+    let filtro = document.getElementById("filtroCombVeiculo")?.value || "todos";
+
     let html = "";
 
     combustivel.forEach((c,i)=>{
+
+        if(filtro !== "todos" && c.veiculo !== filtro) return;
+
+        let v = veiculos.find(v => v.placa === c.veiculo);
+
         html += `
         <div class="card">
+            <b>Veículo:</b> ${v ? v.nome + " - " + v.placa : c.veiculo}<br>
             <b>Data:</b> ${c.data}<br>
             <b>Valor:</b> R$ ${c.valor}<br>
             <b>KM:</b> ${c.km}<br>
@@ -480,11 +499,25 @@ function delCombustivel(i){
     renderCombustivel();
 }
 
+        function carregarVeiculosComb(){
+    let sel = document.getElementById("veiculoComb");
+    let filtro = document.getElementById("filtroCombVeiculo");
+
+    sel.innerHTML = `<option value="">Selecione o veículo</option>`;
+    filtro.innerHTML = `<option value="todos">Todos os veículos</option>`;
+
+    veiculos.forEach(v=>{
+        sel.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
+        filtro.innerHTML += `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`;
+    });
+}
+
 // ====== INICIALIZAÇÃO ======
 renderMotoristas();
 renderVeiculos();
 renderPecas();
 renderCombustivel();
+carregarVeiculosComb();
         
 mostrar('motoristas');
 </script>
