@@ -141,18 +141,20 @@ input, select{
 </div>
 
 <!-- PEÇAS -->
-<div class="card">
-    <h3>Peças</h3>
+<div id="pecas" class="secao">
+    <div class="card">
+        <h3>Peças</h3>
 
-    <input id="nomePeca" placeholder="Nome peça">
-    <input id="qtdPeca" placeholder="Quantidade" type="number">
-    <input id="pessoaPeca" placeholder="Retirado por">
-    <input id="dataPeca" type="date">
+        <input id="nomePeca" placeholder="Nome peça">
+        <input id="qtdPeca" placeholder="Quantidade" type="number">
+        <input id="pessoaPeca" placeholder="Retirado por">
+        <input id="dataPeca" type="date">
 
-    <button class="add" onclick="addPeca()">Adicionar</button>
+        <button class="add" onclick="addPeca()">Adicionar</button>
+    </div>
+
+    <div id="listaPecas"></div>
 </div>
-
-<div id="listaPecas"></div>
 
 <!-- COMBUSTÍVEL -->
 <div id="combustivel" class="secao">
@@ -175,7 +177,6 @@ input, select{
 
 let motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
 let veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
-let pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
 let combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
 
 // ================= SALVAR =================
