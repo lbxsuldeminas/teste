@@ -1,207 +1,476 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle de Veículos</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<title>Secretaria de Transportes</title>
+    body {
+      margin: 0;
+      background: #f4f6f8;
+      color: #222;
+    }
 
-<link rel="stylesheet" href="style.css">
+    header {
+      background: #1f4e79;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
 
+    nav {
+      display: flex;
+      background: #163a5c;
+    }
+
+    nav button {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      background: #163a5c;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    nav button.active,
+    nav button:hover {
+      background: #2f75b5;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    section {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #1f4e79;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 15px;
+    }
+
+    form button {
+      background: #1f4e79;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form button:hover {
+      background: #163a5c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #1f4e79;
+      color: white;
+    }
+
+    .btn-excluir {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 7px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .total {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1f4e79;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <h1>Controle de Veículos</h1>
+    <p>Secretaria de Transporte</p>
+  </header>
+
+  <nav>
+    <button class="active" onclick="abrirAba('veiculos', this)">Cadastro de Veículos</button>
+    <button onclick="abrirAba('responsaveis', this)">Responsáveis</button>
+    <button onclick="abrirAba('manutencoes', this)">Manutenções e Gastos</button>
+  </nav>
+
+  <main>
+    <section id="veiculos" class="active">
+      <h2>Cadastro de Veículos</h2>
+
+      <form onsubmit="adicionarVeiculo(event)">
+        <input type="text" id="placa" placeholder="Placa do veículo" required />
+        <input type="text" id="modelo" placeholder="Modelo do veículo" required />
+        <button type="submit">Adicionar Veículo</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="listaVeiculos"></tbody>
+      </table>
+    </section>
+
+    <section id="responsaveis">
+      <h2>Responsáveis</h2>
+
+      <form onsubmit="adicionarResponsavel(event)">
+        <select id="veiculoResponsavel" required></select>
+        <input type="text" id="motorista" placeholder="Motorista responsável" required />
+        <button type="submit">Salvar Responsável</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Motorista Responsável</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="listaResponsaveis"></tbody>
+      </table>
+    </section>
+
+    <section id="manutencoes">
+      <h2>Manutenções e Gastos</h2>
+
+      <form onsubmit="adicionarManutencao(event)">
+        <select id="veiculoManutencao" required></select>
+        <input type="date" id="dataManutencao" required />
+
+        <select id="tipoGasto" required>
+          <option value="">Selecione o tipo de gasto</option>
+          <option value="Combustível">Combustível</option>
+          <option value="Óleo">Óleo</option>
+          <option value="Pneus">Pneus</option>
+          <option value="Outros">Outros</option>
+        </select>
+
+        <input type="text" id="descricao" placeholder="Descrição" required />
+        <input type="number" id="valor" placeholder="Valor gasto" step="0.01" required />
+
+        <button type="submit">Adicionar Gasto</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="listaManutencoes"></tbody>
+      </table>
+
+      <div class="total" id="totalGastos">Total: R$ 0,00</div>
+    </section>
+  </main>
+
+  <script>
+    let veiculos = JSON.parse(localStorage.getItem("veiculos")) || [];
+    let responsaveis = JSON.parse(localStorage.getItem("responsaveis")) || [];
+    let manutencoes = JSON.parse(localStorage.getItem("manutencoes")) || [];
+
+    function salvarDados() {
+      localStorage.setItem("veiculos", JSON.stringify(veiculos));
+      localStorage.setItem("responsaveis", JSON.stringify(responsaveis));
+      localStorage.setItem("manutencoes", JSON.stringify(manutencoes));
+    }
 
-<div class="sidebar">
+    function abrirAba(id, botao) {
+      document.querySelectorAll("section").forEach(secao => {
+        secao.classList.remove("active");
+      });
 
-<h2>🚗 Transportes</h2>
+      document.querySelectorAll("nav button").forEach(btn => {
+        btn.classList.remove("active");
+      });
 
-<button onclick="mostrarTela('dashboard')">
-🏠 Dashboard
-</button>
+      document.getElementById(id).classList.add("active");
+      botao.classList.add("active");
 
-<button onclick="mostrarTela('veiculos')">
-🚙 Veículos
-</button>
+      atualizarTela();
+    }
 
-<button onclick="mostrarTela('novoVeiculo')">
-➕ Adicionar Veículo
-</button>
+    function adicionarVeiculo(event) {
+      event.preventDefault();
 
-<button onclick="mostrarTela('motoristas')">
-👨 Motoristas
-</button>
+      const placa = document.getElementById("placa").value.trim().toUpperCase();
+      const modelo = document.getElementById("modelo").value.trim();
 
-<button onclick="mostrarTela('combustivel')">
-⛽ Combustível
-</button>
+      const existe = veiculos.some(v => v.placa === placa);
 
-<button onclick="mostrarTela('manutencao')">
-🔧 Manutenção
-</button>
+      if (existe) {
+        alert("Essa placa já foi cadastrada.");
+        return;
+      }
 
-<button onclick="mostrarTela('agenda')">
-📅 Agenda
-</button>
+      veiculos.push({ placa, modelo });
 
-</div>
+      document.getElementById("placa").value = "";
+      document.getElementById("modelo").value = "";
 
-<div class="conteudo">
+      salvarDados();
+      atualizarTela();
+    }
 
-<!-- DASHBOARD -->
+    function excluirVeiculo(index) {
+      const placa = veiculos[index].placa;
 
-<div id="dashboard" class="tela">
+      if (!confirm("Deseja excluir este veículo?")) return;
 
-<h1>Dashboard</h1>
-
-<div class="cards">
-
-<div class="card">
-
-<h3>Total de Veículos</h3>
-
-<h2 id="totalVeiculos">0</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Motoristas</h3>
-
-<h2>0</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Manutenções</h3>
-
-<h2>0</h2>
-
-</div>
-
-<div class="card">
-
-<h3>Combustível</h3>
-
-<h2>R$ 0,00</h2>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- VEICULOS -->
-
-<div id="veiculos" class="tela esconder">
-
-<h1>Veículos</h1>
-
-<input
-type="text"
-id="pesquisa"
-placeholder="Pesquisar veículo..."
-onkeyup="pesquisarVeiculo()">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Placa</th>
-<th>Modelo</th>
-<th>Ano</th>
-<th>KM</th>
-<th>Ações</th>
-
-</tr>
-
-</thead>
-
-<tbody id="listaVeiculos">
-
-</tbody>
-
-</table>
-
-</div>
-
-<!-- NOVO VEICULO -->
-
-<div id="novoVeiculo" class="tela esconder">
-
-<h1>Novo Veículo</h1>
-
-<div class="formulario">
-
-<input id="placa" placeholder="Placa">
-
-<input id="modelo" placeholder="Modelo">
-
-<input id="marca" placeholder="Marca">
-
-<input id="ano" placeholder="Ano">
-
-<input id="cor" placeholder="Cor">
-
-<input id="km" placeholder="Quilometragem">
-
-<button onclick="salvarVeiculo()">
-
-Salvar Veículo
-
-</button>
-
-</div>
-
-</div>
-
-<!-- MOTORISTAS -->
-
-<div id="motoristas" class="tela esconder">
-
-<h1>Motoristas</h1>
-
-<p>Em desenvolvimento...</p>
-
-</div>
-
-<!-- COMBUSTIVEL -->
-
-<div id="combustivel" class="tela esconder">
-
-<h1>Combustível</h1>
-
-<p>Em desenvolvimento...</p>
-
-</div>
-
-<!-- MANUTENÇÃO -->
-
-<div id="manutencao" class="tela esconder">
-
-<h1>Manutenção</h1>
-
-<p>Em desenvolvimento...</p>
-
-</div>
-
-<!-- AGENDA -->
-
-<div id="agenda" class="tela esconder">
-
-<h1>Agenda</h1>
-
-<p>Em desenvolvimento...</p>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
+      veiculos.splice(index, 1);
+      responsaveis = responsaveis.filter(r => r.placa !== placa);
+      manutencoes = manutencoes.filter(m => m.placa !== placa);
+
+      salvarDados();
+      atualizarTela();
+    }
+
+    function adicionarResponsavel(event) {
+      event.preventDefault();
+
+      const placa = document.getElementById("veiculoResponsavel").value;
+      const motorista = document.getElementById("motorista").value.trim();
+
+      const veiculo = veiculos.find(v => v.placa === placa);
+
+      const existente = responsaveis.find(r => r.placa === placa);
+
+      if (existente) {
+        existente.motorista = motorista;
+      } else {
+        responsaveis.push({
+          placa,
+          modelo: veiculo.modelo,
+          motorista
+        });
+      }
+
+      document.getElementById("motorista").value = "";
+
+      salvarDados();
+      atualizarTela();
+    }
+
+    function excluirResponsavel(index) {
+      if (!confirm("Deseja excluir este responsável?")) return;
+
+      responsaveis.splice(index, 1);
+
+      salvarDados();
+      atualizarTela();
+    }
+
+    function adicionarManutencao(event) {
+      event.preventDefault();
+
+      const placa = document.getElementById("veiculoManutencao").value;
+      const veiculo = veiculos.find(v => v.placa === placa);
+
+      const data = document.getElementById("dataManutencao").value;
+      const tipo = document.getElementById("tipoGasto").value;
+      const descricao = document.getElementById("descricao").value.trim();
+      const valor = parseFloat(document.getElementById("valor").value);
+
+      manutencoes.push({
+        placa,
+        modelo: veiculo.modelo,
+        data,
+        tipo,
+        descricao,
+        valor
+      });
+
+      document.getElementById("dataManutencao").value = "";
+      document.getElementById("tipoGasto").value = "";
+      document.getElementById("descricao").value = "";
+      document.getElementById("valor").value = "";
+
+      salvarDados();
+      atualizarTela();
+    }
+
+    function excluirManutencao(index) {
+      if (!confirm("Deseja excluir este gasto?")) return;
+
+      manutencoes.splice(index, 1);
+
+      salvarDados();
+      atualizarTela();
+    }
+
+    function atualizarTela() {
+      atualizarVeiculos();
+      atualizarSelects();
+      atualizarResponsaveis();
+      atualizarManutencoes();
+    }
+
+    function atualizarVeiculos() {
+      const lista = document.getElementById("listaVeiculos");
+      lista.innerHTML = "";
+
+      veiculos.forEach((veiculo, index) => {
+        lista.innerHTML += `
+          <tr>
+            <td>${veiculo.placa}</td>
+            <td>${veiculo.modelo}</td>
+            <td>
+              <button class="btn-excluir" onclick="excluirVeiculo(${index})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function atualizarSelects() {
+      const selectResponsavel = document.getElementById("veiculoResponsavel");
+      const selectManutencao = document.getElementById("veiculoManutencao");
+
+      selectResponsavel.innerHTML = `<option value="">Selecione o veículo</option>`;
+      selectManutencao.innerHTML = `<option value="">Selecione o veículo</option>`;
+
+      veiculos.forEach(veiculo => {
+        selectResponsavel.innerHTML += `
+          <option value="${veiculo.placa}">
+            ${veiculo.placa} - ${veiculo.modelo}
+          </option>
+        `;
+
+        selectManutencao.innerHTML += `
+          <option value="${veiculo.placa}">
+            ${veiculo.placa} - ${veiculo.modelo}
+          </option>
+        `;
+      });
+    }
+
+    function atualizarResponsaveis() {
+      const lista = document.getElementById("listaResponsaveis");
+      lista.innerHTML = "";
+
+      responsaveis.forEach((item, index) => {
+        lista.innerHTML += `
+          <tr>
+            <td>${item.placa}</td>
+            <td>${item.modelo}</td>
+            <td>${item.motorista}</td>
+            <td>
+              <button class="btn-excluir" onclick="excluirResponsavel(${index})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function atualizarManutencoes() {
+      const lista = document.getElementById("listaManutencoes");
+      const totalGastos = document.getElementById("totalGastos");
+
+      lista.innerHTML = "";
+
+      let total = 0;
+
+      manutencoes.forEach((item, index) => {
+        total += item.valor;
+
+        lista.innerHTML += `
+          <tr>
+            <td>${formatarData(item.data)}</td>
+            <td>${item.placa}</td>
+            <td>${item.modelo}</td>
+            <td>${item.tipo}</td>
+            <td>${item.descricao}</td>
+            <td>${formatarMoeda(item.valor)}</td>
+            <td>
+              <button class="btn-excluir" onclick="excluirManutencao(${index})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      totalGastos.innerText = `Total: ${formatarMoeda(total)}`;
+    }
+
+    function formatarMoeda(valor) {
+      return valor.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+
+    function formatarData(data) {
+      if (!data) return "";
+
+      const partes = data.split("-");
+      return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+
+    atualizarTela();
+  </script>
 </body>
 </html>
