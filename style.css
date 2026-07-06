@@ -1,0 +1,220 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    display:flex;
+    min-height:100vh;
+}
+
+/* MENU */
+
+.sidebar{
+    width:240px;
+    background:#1f2937;
+    color:#fff;
+    padding:20px;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    overflow:auto;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:24px;
+}
+
+.sidebar button{
+    width:100%;
+    border:none;
+    background:none;
+    color:#fff;
+    text-align:left;
+    padding:14px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:8px;
+    font-size:16px;
+    transition:.3s;
+}
+
+.sidebar button:hover{
+    background:#2563eb;
+}
+
+/* CONTEÚDO */
+
+.conteudo{
+    margin-left:240px;
+    width:calc(100% - 240px);
+    padding:35px;
+}
+
+.tela h1{
+    margin-bottom:25px;
+    color:#1f2937;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:#666;
+    margin-bottom:12px;
+}
+
+.card h2{
+    color:#2563eb;
+    font-size:34px;
+}
+
+/* TABELA */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+}
+
+thead{
+    background:#2563eb;
+    color:white;
+}
+
+th{
+    padding:15px;
+}
+
+td{
+    padding:14px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f7f7f7;
+}
+
+/* INPUT */
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#2563eb;
+}
+
+/* FORM */
+
+.formulario{
+    max-width:700px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.formulario button{
+    width:100%;
+    padding:14px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.formulario button:hover{
+    background:#1d4ed8;
+}
+
+/* BOTÕES DA TABELA */
+
+.editar{
+
+    background:#f59e0b;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.excluir{
+
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* ESCONDER TELAS */
+
+.esconder{
+    display:none;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:900px){
+
+.sidebar{
+
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+.conteudo{
+
+    margin-left:0;
+    width:100%;
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+}
+
+table{
+
+    display:block;
+    overflow-x:auto;
+}
+
+}
