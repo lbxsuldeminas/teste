@@ -1,391 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
-<title>Secretaria de Transportes - CRV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f6f9;
-    display:flex;
-    color:#333;
-}
+<title>Secretaria de Transportes</title>
 
-/* MENU */
-.menu{
-    width:240px;
-    background:linear-gradient(180deg,#1e2a38,#17202b);
-    color:white;
-    height:100vh;
-    padding:20px;
-}
+<link rel="stylesheet" href="style.css">
 
-.menu button{
-    width:100%;
-    margin-bottom:10px;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#2f435a;
-    color:white;
-}
-
-.content{ flex:1; padding:25px; }
-
-.card{
-    background:white;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:15px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.08);
-}
-
-input, select{
-    padding:10px;
-    margin:5px;
-    border-radius:8px;
-    border:1px solid #ccc;
-}
-
-.add{ background:#28a745; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; }
-.del{ background:#dc3545; color:white; border:none; padding:5px 8px; border-radius:6px; cursor:pointer; }
-.edit{ background:#007bff; color:white; border:none; padding:5px 8px; border-radius:6px; cursor:pointer; }
-
-.status-ok{ color:green; font-weight:bold; }
-.status-manut{ color:red; font-weight:bold; }
-
-.secao{ display:none; }
-.secao.ativa{ display:block; }
-
-</style>
 </head>
 
 <body>
 
-<div class="menu">
-    <h2>Secretaria de Transportes - CRV</h2>
-    <button onclick="mostrar('motoristas')">Motoristas</button>
-    <button onclick="mostrar('veiculos')">Veículos</button>
-    <button onclick="mostrar('pecas')">Peças</button>
-    <button onclick="mostrar('combustivel')">Combustível</button>
+<div class="sidebar">
+
+<h2>🚗 Transportes</h2>
+
+<button onclick="mostrarTela('dashboard')">
+🏠 Dashboard
+</button>
+
+<button onclick="mostrarTela('veiculos')">
+🚙 Veículos
+</button>
+
+<button onclick="mostrarTela('novoVeiculo')">
+➕ Adicionar Veículo
+</button>
+
+<button onclick="mostrarTela('motoristas')">
+👨 Motoristas
+</button>
+
+<button onclick="mostrarTela('combustivel')">
+⛽ Combustível
+</button>
+
+<button onclick="mostrarTela('manutencao')">
+🔧 Manutenção
+</button>
+
+<button onclick="mostrarTela('agenda')">
+📅 Agenda
+</button>
+
 </div>
 
-<div class="content">
+<div class="conteudo">
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="tela">
+
+<h1>Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total de Veículos</h3>
+
+<h2 id="totalVeiculos">0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Motoristas</h3>
+
+<h2>0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Manutenções</h3>
+
+<h2>0</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Combustível</h3>
+
+<h2>R$ 0,00</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- VEICULOS -->
+
+<div id="veiculos" class="tela esconder">
+
+<h1>Veículos</h1>
+
+<input
+type="text"
+id="pesquisa"
+placeholder="Pesquisar veículo..."
+onkeyup="pesquisarVeiculo()">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Placa</th>
+<th>Modelo</th>
+<th>Ano</th>
+<th>KM</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaVeiculos">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- NOVO VEICULO -->
+
+<div id="novoVeiculo" class="tela esconder">
+
+<h1>Novo Veículo</h1>
+
+<div class="formulario">
+
+<input id="placa" placeholder="Placa">
+
+<input id="modelo" placeholder="Modelo">
+
+<input id="marca" placeholder="Marca">
+
+<input id="ano" placeholder="Ano">
+
+<input id="cor" placeholder="Cor">
+
+<input id="km" placeholder="Quilometragem">
+
+<button onclick="salvarVeiculo()">
+
+Salvar Veículo
+
+</button>
+
+</div>
+
+</div>
 
 <!-- MOTORISTAS -->
-<div id="motoristas" class="secao ativa">
-    <div class="card">
-        <h3>Motoristas</h3>
-        <input id="nomeMotorista" placeholder="Nome">
-        <button class="add" onclick="addMotorista()">Adicionar</button>
-    </div>
-    <div id="listaMotoristas"></div>
+
+<div id="motoristas" class="tela esconder">
+
+<h1>Motoristas</h1>
+
+<p>Em desenvolvimento...</p>
+
 </div>
 
-<!-- VEÍCULOS -->
-<div id="veiculos" class="secao">
-    <div class="card">
-        <h3>Veículos</h3>
+<!-- COMBUSTIVEL -->
 
-        <input id="nomeVeiculo" placeholder="Nome">
-        <input id="placaVeiculo" placeholder="Placa">
+<div id="combustivel" class="tela esconder">
 
-        <select id="secretariaVeiculo">
-            <option value="">Secretaria</option>
-            <option>Administração</option>
-            <option>Agricultura</option>
-            <option>Assistência Social</option>
-            <option>Cultura</option>
-            <option>Educação</option>
-            <option>Gabinete</option>
-            <option>Obras</option>
-            <option>Saúde</option>
-            <option>Conselho Tutelar</option>
-        </select>
+<h1>Combustível</h1>
 
-        <select id="statusVeiculo">
-            <option value="">Situação</option>
-            <option>Disponível</option>
-            <option>Em manutenção</option>
-        </select>
+<p>Em desenvolvimento...</p>
 
-        <button class="add" onclick="addVeiculo()">Adicionar</button>
-    </div>
-
-    <div class="card">
-        <h3>Filtros</h3>
-        <select id="filtroStatus" onchange="renderVeiculos()">
-            <option>Todos</option>
-            <option>Disponível</option>
-            <option>Em manutenção</option>
-        </select>
-
-        <select id="filtroSecretaria" onchange="renderVeiculos()">
-            <option>Todas</option>
-            <option>Administração</option>
-            <option>Agricultura</option>
-            <option>Assistência Social</option>
-            <option>Cultura</option>
-            <option>Educação</option>
-            <option>Gabinete</option>
-            <option>Obras</option>
-            <option>Saúde</option>
-            <option>Conselho Tutelar</option>
-        </select>
-    </div>
-
-    <div id="listaVeiculos"></div>
 </div>
 
-<!-- PEÇAS -->
-<div id="pecas" class="secao">
-    <div class="card">
-        <h3>Peças</h3>
+<!-- MANUTENÇÃO -->
 
-        <input id="nomePeca" placeholder="Nome peça">
-        <input id="qtdPeca" placeholder="Quantidade" type="number">
-        <input id="pessoaPeca" placeholder="Retirado por">
-        <input id="dataPeca" type="date">
+<div id="manutencao" class="tela esconder">
 
-        <button class="add" onclick="addPeca()">Adicionar</button>
-    </div>
+<h1>Manutenção</h1>
 
-    <div id="listaPecas"></div>
+<p>Em desenvolvimento...</p>
+
 </div>
 
-<!-- COMBUSTÍVEL -->
-<div id="combustivel" class="secao">
-    <div class="card">
-        <h3>Combustível</h3>
+<!-- AGENDA -->
 
-        <select id="veiculoComb"></select>
+<div id="agenda" class="tela esconder">
 
-        <input type="date" id="dataComb">
-        <input id="valorComb" placeholder="Valor">
-        <input id="kmComb" placeholder="KM">
+<h1>Agenda</h1>
 
-        <button class="add" onclick="addCombustivel()">Adicionar</button>
-    </div>
+<p>Em desenvolvimento...</p>
 
-    <div id="listaCombustivel"></div>
 </div>
 
-<script>
+</div>
 
-let motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
-let veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
-let pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
-let combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
-
-// ================= SALVAR =================
-function salvar(){
-    localStorage.setItem("motoristas", JSON.stringify(motoristas));
-    localStorage.setItem("veiculos", JSON.stringify(veiculos));
-    localStorage.setItem("pecas", JSON.stringify(pecas));
-    localStorage.setItem("combustivel", JSON.stringify(combustivel));
-}
-
-// ================= NAVEGAÇÃO =================
-function mostrar(secao){
-    document.querySelectorAll(".secao").forEach(s => s.classList.remove("ativa"));
-    document.getElementById(secao).classList.add("ativa");
-
-    if(secao === "veiculos") renderVeiculos();
-    if(secao === "motoristas") renderMotoristas();
-    if(secao === "pecas") renderPecas();
-    if(secao === "combustivel") renderCombustivel();
-}
-
-// ================= MOTORISTAS =================
-function addMotorista(){
-    const nome = document.getElementById("nomeMotorista").value.trim();
-    if(!nome) return;
-
-    motoristas.push({nome});
-    salvar();
-    renderMotoristas();
-
-    document.getElementById("nomeMotorista").value = "";
-}
-
-function renderMotoristas(){
-    const div = document.getElementById("listaMotoristas");
-
-    div.innerHTML = motoristas.map((m,i)=>`
-        <div class="card">
-            <b>${m.nome}</b>
-            <button class="del" onclick="delMotorista(${i})">X</button>
-        </div>
-    `).join("");
-}
-
-function delMotorista(i){
-    motoristas.splice(i,1);
-    salvar();
-    renderMotoristas();
-}
-
-// ================= VEÍCULOS =================
-function addVeiculo(){
-    const nome = document.getElementById("nomeVeiculo").value.trim();
-    const placa = document.getElementById("placaVeiculo").value.trim();
-
-    if(!nome || !placa) return;
-
-    veiculos.push({
-        nome,
-        placa,
-        secretaria: document.getElementById("secretariaVeiculo").value,
-        status: document.getElementById("statusVeiculo").value || "Disponível"
-    });
-
-    salvar();
-    renderVeiculos();
-    atualizarSelectVeiculos();
-    mostrar("veiculos");
-
-    document.getElementById("nomeVeiculo").value = "";
-    document.getElementById("placaVeiculo").value = "";
-}
-
-function renderVeiculos(){
-    const statusFiltro = document.getElementById("filtroStatus").value;
-    const secretariaFiltro = document.getElementById("filtroSecretaria").value;
-
-    let lista = veiculos;
-
-    if(statusFiltro !== "Todos" && statusFiltro !== ""){
-        lista = lista.filter(v => v.status === statusFiltro);
-    }
-
-    if(secretariaFiltro !== "Todas" && secretariaFiltro !== ""){
-        lista = lista.filter(v => v.secretaria === secretariaFiltro);
-    }
-
-    document.getElementById("listaVeiculos").innerHTML = lista.map(v=>`
-        <div class="card">
-            <b>${v.nome}</b><br>
-            ${v.placa}<br>
-            ${v.secretaria}<br>
-            <span class="${v.status === "Disponível" ? "status-ok" : "status-manut"}">
-                ${v.status}
-            </span>
-        </div>
-    `).join("");
-}
-
-// ================= PEÇAS =================
-function addPeca(){
-    const nome = document.getElementById("nomePeca").value.trim();
-    const qtd = document.getElementById("qtdPeca").value.trim();
-    const pessoa = document.getElementById("pessoaPeca").value.trim();
-    const data = document.getElementById("dataPeca").value;
-
-    if(!nome || !qtd) return;
-
-    pecas.push({
-        nome,
-        qtd,
-        pessoa: pessoa || "Não informado",
-        data: data || "Sem data"
-    });
-
-    salvar();
-    renderPecas();
-
-    document.getElementById("nomePeca").value = "";
-    document.getElementById("qtdPeca").value = "";
-    document.getElementById("pessoaPeca").value = "";
-    document.getElementById("dataPeca").value = "";
-}
-function renderPecas(){
-    const div = document.getElementById("listaPecas");
-
-    div.innerHTML = pecas.map((p,i)=>`
-        <div class="card">
-            <b>${p.nome}</b><br>
-            Quantidade: ${p.qtd}<br>
-            Retirado por: ${p.pessoa}<br>
-            Data: ${p.data}
-
-            <br><br>
-            <button class="del" onclick="delPeca(${i})">X</button>
-        </div>
-    `).join("");
-}
-
-function delPeca(i){
-    pecas.splice(i,1);
-    salvar();
-    renderPecas();
-}
-
-
-// ================= COMBUSTÍVEL =================
-function addCombustivel(){
-    const veiculo = document.getElementById("veiculoComb").value;
-    const data = document.getElementById("dataComb").value;
-
-    if(!veiculo || !data) return;
-
-    combustivel.push({
-        veiculo,
-        data,
-        valor: document.getElementById("valorComb").value || "0",
-        km: document.getElementById("kmComb").value || "0"
-    });
-
-    salvar();
-    renderCombustivel();
-
-    document.getElementById("dataComb").value = "";
-    document.getElementById("valorComb").value = "";
-    document.getElementById("kmComb").value = "";
-}
-
-function renderCombustivel(){
-    const div = document.getElementById("listaCombustivel");
-
-    div.innerHTML = combustivel.map(c=>`
-        <div class="card">
-            ${c.veiculo}<br>
-            ${c.data} | R$ ${c.valor} | KM ${c.km}
-        </div>
-    `).join("");
-}
-
-// ================= SELECT VEÍCULOS =================
-function atualizarSelectVeiculos(){
-    const select = document.getElementById("veiculoComb");
-
-    select.innerHTML = veiculos
-        .map(v => `<option value="${v.placa}">${v.nome} - ${v.placa}</option>`)
-        .join("");
-}
-
-// ================= INICIAL =================
-function init(){
-    // garante carregamento seguro do localStorage
-    motoristas = JSON.parse(localStorage.getItem("motoristas") || "[]");
-    veiculos = JSON.parse(localStorage.getItem("veiculos") || "[]");
-    pecas = JSON.parse(localStorage.getItem("pecas") || "[]");
-    combustivel = JSON.parse(localStorage.getItem("combustivel") || "[]");
-
-    renderMotoristas();
-    renderVeiculos();
-    renderPecas();
-    renderCombustivel();
-    atualizarSelectVeiculos();
-}
-
-// inicializa tudo corretamente após carregar a página
-window.onload = init;
-
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
